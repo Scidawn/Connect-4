@@ -8,7 +8,7 @@ public class Field {
     private final int height;
     private Slot[][] slots;
 
-    public Field(){
+    public Field() {
         this(7, 6);
     }
 
@@ -49,7 +49,7 @@ public class Field {
 
     public String getPrintableField() {
         StringBuilder sb = new StringBuilder();
-        for (int y = height-1; y >= 0; y--) {
+        for (int y = height - 1; y >= 0; y--) {
             for (int x = 0; x < width; x++) {
                 if (slots[x][y] == Slot.EMPTY)
                     sb.append("-");
@@ -63,7 +63,7 @@ public class Field {
 
         for (int i = 1; i <= width; i++) {
             sb.append(i);
-            if(i<10) {
+            if (i < 10) {
                 sb.append("  ");
             } else
                 sb.append(" ");
@@ -102,23 +102,57 @@ public class Field {
 
     /**
      * Checks if there is a diagonal win starting at the given coordinates
+     *
      * @param x x-coordinate
      * @param y y-coordinate
      * @return true if there is a diagonal win, false otherwise
      */
-    private boolean checkDiagonal(int x, int y){
-        
+    private boolean checkDiagonal(int x, int y) {
+        boolean upwards = true;
+        boolean downwards = true;
+
+        if (slots[x][y] == Slot.EMPTY) {
+            return false;
+        }
+
+        for (int i = 1; i < WINNING_LENGTH &&
+                x + WINNING_LENGTH < width &&
+                y + WINNING_LENGTH < height; i++) {
+            if (slots[x][y] != slots[x + i][y + i]) {
+                upwards = false;
+                break;
+            }
+        }
+        for (int i = 1; i < WINNING_LENGTH &&
+                x + WINNING_LENGTH <= width &&
+                y - WINNING_LENGTH <= height; i++) {
+            if (slots[x][y] != slots[x + i][y - i]) {
+                downwards = false;
+                break;
+            }
+        }
+        return upwards || downwards;
     }
 
-    private boolean checkDiagonals(){
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++){
-                return checkDiagonal(x,y);
+    /**
+     * Checks if there is a diagonal win in the field
+     *
+     * @return true if there is a diagonal win, false otherwise
+     */
+    private boolean checkDiagonals() {
+        for (int x = 0; x <= width - WINNING_LENGTH; x++) {
+            for (int y = 0; y <= height; y++) {
+                return checkDiagonal(x, y);
             }
         }
         return false;
     }
 
+    /**
+     * Checks if there is a vertical win in the field
+     *
+     * @return true if there is a vertical win, false otherwise
+     */
     private boolean checkVertical() {
         for (int x = 0; x < width; x++) {
             int count = 0;
@@ -142,6 +176,11 @@ public class Field {
         return false;
     }
 
+    /**
+     * Checks if there is a horizontal win in the field
+     *
+     * @return true if there is a horizontal win, false otherwise
+     */
     private boolean checkHorizontal() {
         for (int y = 0; y < height; y++) {
             int count = 0;
@@ -165,9 +204,14 @@ public class Field {
         return false;
     }
 
+    /**
+     * Checks if the field is full
+     *
+     * @return true if the field is full, false otherwise
+     */
     public boolean checkDraw() {
         for (int x = 0; x < width; x++) {
-            if (slots[x][height-1] == Slot.EMPTY) {
+            if (slots[x][height - 1] == Slot.EMPTY) {
                 return false;
             }
         }
