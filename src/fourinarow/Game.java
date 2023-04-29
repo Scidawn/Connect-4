@@ -9,7 +9,7 @@ public class Game {
     InputHandler handler;
 
     public Game(){
-        field = new Field();
+        field = new Field(7,80);
         handler = new InputHandler();
         gameloop();
     }
