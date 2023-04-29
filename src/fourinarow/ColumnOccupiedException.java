@@ -1,2 +1,4 @@
-package fourinarow;public class ColumnOccupiedException {
+package fourinarow;
+
+public class ColumnOccupiedException extends Throwable {
 }

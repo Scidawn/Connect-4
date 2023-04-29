@@ -1,2 +1,7 @@
-package fourinarow;public enum Slot {
+package fourinarow;
+
+public enum Slot {
+    X,
+    O,
+    EMPTY,
 }
