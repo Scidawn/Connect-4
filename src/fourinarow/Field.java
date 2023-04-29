@@ -3,34 +3,23 @@ package fourinarow;
 import java.util.Arrays;
 
 public class Field {
-    private static final int WINNING_LENGTH;
+    private static final int WINNING_LENGTH = 4;
     private final int width;
     private final int height;
     private Slot[][] slots;
 
     public Field(){
-        this(7,6);
+        this(7, 6);
     }
 
     public Field(int width, int height) {
         this.width = width;
         this.height = height;
-        WINNING_LENGTH = 4;
 
         slots = new Slot[width][height];
         for (int x = 0; x < width; x++) {
             Arrays.fill(slots[x], Slot.EMPTY);
         }
-    }
-
-    public Field(int WINNING_LENGTH){
-        this();
-        this.WINNING_LENGTH = WINNING_LENGTH;
-    }
-
-    public Field(int width, int height, int WINNING_LENGTH){
-        this(width, height);
-        this.WINNING_LENGTH = WINNING_LENGTH;
     }
 
     public int getWidth() {
@@ -88,6 +77,8 @@ public class Field {
         return checkHorizontal() || checkVertical() || checkDiagonal();
     }
 
+    /*
+    @Deprecated
     private boolean checkDiagonal() {
         //make diagonals with variable winning length
         for (int x = 0; x < width-4; x++) {
@@ -104,6 +95,25 @@ public class Field {
                         slots[x+3][y] == slots[x][y+3]) {
                     return true;
                 }
+            }
+        }
+        return false;
+    }*/
+
+    /**
+     * Checks if there is a diagonal win starting at the given coordinates
+     * @param x x-coordinate
+     * @param y y-coordinate
+     * @return true if there is a diagonal win, false otherwise
+     */
+    private boolean checkDiagonal(int x, int y){
+        
+    }
+
+    private boolean checkDiagonals(){
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++){
+                return checkDiagonal(x,y);
             }
         }
         return false;

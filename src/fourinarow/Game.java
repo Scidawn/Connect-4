@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Game {
     private Field field;
-    private final int playerCount = 4;
+    private final int playerCount = 2;
     private int activePlayer = playerCount;
     InputHandler handler;
 
