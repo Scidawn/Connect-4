@@ -14,6 +14,9 @@ public class Game {
         gameloop();
     }
 
+    /**
+     * The main game loop.
+     */
     private void gameloop() {
         Scanner scanner = new Scanner(System.in);
         String input;
@@ -38,6 +41,10 @@ public class Game {
         }
     }
 
+    /**
+     * Checks if the game is over.
+     * @return 1 if a player has won, 2 if the game is a draw, 0 if the game is still going.
+     */
     private int gameOverState() {
         if (field.checkWin())
             return 1;
@@ -46,14 +53,23 @@ public class Game {
         return 0;
     }
 
+    /**
+     * Starts the game.
+     */
     public static void main(String[] args) {
         new Game();
     }
 
+    /**
+     * Getters and setters.
+     */
     public Field getField() {
         return field;
     }
 
+    /**
+     * Getters and setters.
+     */
     public int getActivePlayer() {
         return activePlayer;
     }

@@ -5,6 +5,12 @@ public class InputHandler {
 
     }
 
+    /**
+     * Checks if the input is "exit" or a number, evaluates it and if so, enters the number into the game.
+     * @param game The game to enter the input into.
+     * @param input The input to check.
+     * @return True if the input was valid, false if not.
+     */
     public boolean recognize(Game game, String input){
         input = input.toLowerCase().strip();
         if (input.equals("exit")){
@@ -22,6 +28,13 @@ public class InputHandler {
         }
     }
 
+    /**
+     * Checks if the input is valid and chooses the row to enter the number into.
+     * @param game The game to enter the input into.
+     * @param field The field to enter the input into.
+     * @param x The x-coordinate to enter the input into.
+     * @return True if the input was valid, false if not.
+     */
     private static boolean enterCheck(Game game, Field field, int x) {
         try {
 
@@ -47,6 +60,12 @@ public class InputHandler {
         }
     }
 
+    /**
+     * Enters the number into the game.
+     * @param game The game to enter the number into.
+     * @param x The x-coordinate to enter the number into.
+     * @param y The y-coordinate to enter the number into.
+     */
     private static void enter(Game game, int x, int y) {
         Slot player = game.getActivePlayer() == 1 ? Slot.X : Slot.O;
         game.getField().setSlot(x,y,player);
