@@ -6,7 +6,7 @@ public class Game {
     private Field field;
     private final int playerCount = 2;
     private int activePlayer = playerCount;
-    InputHandler handler;
+    private final InputHandler handler;
 
     public Game(){
         field = new Field();
