@@ -19,9 +19,9 @@ public class Game {
     private void start() {
         Scanner scanner = new Scanner(System.in);
         String input;
-        int state = 0;
+        GameState state = GameState.ONGOING;
 
-        while (state == 0){
+        while (state == GameState.ONGOING){
             activePlayer = activePlayer % playerCount +1;
             System.out.println(field.getPrintableField());
             System.out.println("Player "+getActivePlayer()+"'s turn.");
@@ -32,24 +32,24 @@ public class Game {
             state = gameOverState();
         }
         System.out.println(field.getPrintableField());
-        if (state == 1){
+        if (state == GameState.WIN){
             System.out.println("Player "+getActivePlayer()+" wins!");
         }
-        else if (state == 2){
+        else if (state == GameState.DRAW){
             System.out.println("Draw!");
         }
     }
 
     /**
-     * Checks if the game is over.
-     * @return 1 if a player has won, 2 if the game is a draw, 0 if the game is still going.
+     * checks if the game is either won, drawn or ongoing.
+     * @return The state of the game.
      */
-    private int gameOverState() {
+    private GameState gameOverState() {
         if (field.checkWin())
-            return 1;
+            return GameState.WIN;
         if (field.checkDraw())
-            return 2;
-        return 0;
+            return GameState.DRAW;
+        return GameState.ONGOING;
     }
 
     /**
