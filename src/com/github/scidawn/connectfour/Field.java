@@ -1,9 +1,9 @@
-package fourinarow;
+package com.github.scidawn.connectfour;
 
 import java.util.Arrays;
 
 public class Field {
-    private static final int WINNING_LENGTH = 8;
+    private static final int WINNING_LENGTH = 4;
     private final int width;
     private final int height;
     private Slot[][] slots;
@@ -74,7 +74,7 @@ public class Field {
     }
 
     public boolean checkWin() {
-        return checkHorizontal() || checkVertical() || checkDiagonals();
+        return checkHorizontals() || checkVerticals() || checkDiagonals();
     }
 
     /**
@@ -93,16 +93,16 @@ public class Field {
         }
 
         for (int i = 1; i < WINNING_LENGTH &&
-                x + WINNING_LENGTH < width &&
-                y + WINNING_LENGTH < height; i++) {
+                x + (WINNING_LENGTH -1) < width &&
+                y + (WINNING_LENGTH -1) < height; i++) {
             if (slots[x][y] != slots[x + i][y + i]) {
                 upwards = false;
                 break;
             }
         }
         for (int i = 1; i < WINNING_LENGTH &&
-                x + WINNING_LENGTH <= width &&
-                y - WINNING_LENGTH <= height; i++) {
+                x + (WINNING_LENGTH -1) < width &&
+                y - (WINNING_LENGTH -1) >= 0; i++) {
             if (slots[x][y] != slots[x + i][y - i]) {
                 downwards = false;
                 break;
@@ -132,7 +132,7 @@ public class Field {
      *
      * @return true if there is a vertical win, false otherwise
      */
-    private boolean checkVertical() {
+    private boolean checkVerticals() {
         for (int x = 0; x < width; x++) {
             int count = 0;
             Slot lastSlot = Slot.EMPTY;
@@ -160,7 +160,7 @@ public class Field {
      *
      * @return true if there is a horizontal win, false otherwise
      */
-    private boolean checkHorizontal() {
+    private boolean checkHorizontals() {
         for (int y = 0; y < height; y++) {
             int count = 0;
             Slot lastSlot = Slot.EMPTY;

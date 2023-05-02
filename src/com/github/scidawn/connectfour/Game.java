@@ -1,4 +1,4 @@
-package fourinarow;
+package com.github.scidawn.connectfour;
 
 import java.util.Scanner;
 
@@ -10,14 +10,13 @@ public class Game {
 
     public Game(){
         field = new Field();
-        handler = new InputHandler();
-        gameloop();
+        handler = new InputHandler(this);
     }
 
     /**
      * The main game loop.
      */
-    private void gameloop() {
+    private void start() {
         Scanner scanner = new Scanner(System.in);
         String input;
         int state = 0;
@@ -29,7 +28,7 @@ public class Game {
 
             do {
                 input = scanner.nextLine();
-            } while (!handler.recognize(this, input));
+            } while (!handler.recognize(input));
             state = gameOverState();
         }
         System.out.println(field.getPrintableField());
@@ -57,7 +56,8 @@ public class Game {
      * Starts the game.
      */
     public static void main(String[] args) {
-        new Game();
+        Game game = new Game();
+        game.start();
     }
 
     /**
