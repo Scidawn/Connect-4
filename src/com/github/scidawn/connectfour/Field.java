@@ -92,9 +92,7 @@ public class Field {
             return false;
         }
 
-        for (int i = 1; i < WINNING_LENGTH &&
-                x + (WINNING_LENGTH -1) < width &&
-                y + (WINNING_LENGTH -1) < height; i++) {
+        for (int i = 1; i < WINNING_LENGTH; i++) {
             if (x + WINNING_LENGTH > width ||
                     y + WINNING_LENGTH > height ||
                     slots[x][y] != slots[x + i][y + i]) {
@@ -104,7 +102,7 @@ public class Field {
         }
         for (int i = 1; i < WINNING_LENGTH; i++) {
             if (x + WINNING_LENGTH > width ||
-                    y - WINNING_LENGTH <= 0 ||
+                    y - (WINNING_LENGTH -1) < 0 ||
                     slots[x][y] != slots[x + i][y - i]) {
                 downwards = false;
                 break;
@@ -119,7 +117,7 @@ public class Field {
      * @return true if there is a diagonal win, false otherwise
      */
     private boolean checkDiagonals() {
-        for (int x = 0; x < width - WINNING_LENGTH; x++) {
+        for (int x = 0; x < width - (WINNING_LENGTH -1); x++) {
             for (int y = 0; y < height; y++) {
                 if (checkDiagonal(x, y)) {
                     return true;
